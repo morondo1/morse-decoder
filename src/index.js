@@ -35,12 +35,23 @@ const MORSE_TABLE = {
     '---..':  '8',
     '----.':  '9',
     '-----':  '0',
-};
-
+};      
 function decode(expr) {
-    // write your solution here
+    let arraySumbl = expr.match(/(.{1,10})/gim);
+   
+    for(let i = 0; i < arraySumbl.length; i++){
+        arraySumbl[i] = arraySumbl[i].substring(arraySumbl[i].indexOf("1"));
+        arraySumbl[i] = arraySumbl[i].replace(/10/g, '.'); 
+        arraySumbl[i] = arraySumbl[i].replace(/11/g, '-'); 
+        if(MORSE_TABLE[arraySumbl[i]]){
+            arraySumbl[i] = MORSE_TABLE[arraySumbl[i]];
+        } else {
+            arraySumbl[i] = ' ';
+        }
+    }
+    arraySumbl = arraySumbl.join('');
+    return arraySumbl;
 }
-
 module.exports = {
     decode
 }
